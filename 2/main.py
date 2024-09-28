@@ -1,6 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib_venn import venn2
+from matplotlib_venn import venn2, venn2_circles
 
 def f(x):
     return x**2 - 4 
@@ -22,15 +22,23 @@ plt.legend()
 plt.show()
 
 dominio = r"D = { x ∈ ℝ | -5 ≤ x ≤ 5 }"
-imagem = r"I = { f(x) ∈ ℝ | f(x) ≥ -4 }"  
+imagem = r"I = { f(x) ∈ ℝ | -4 ≤ f(x) ≤ 10 }"  
 print(dominio)
 print(imagem)
 
 plt.figure(figsize=(8, 8))
 
-set_a = {1, 2, 3, 4, 5}
-set_b = {4, 5, 6, 7, 8}
+set_a = {1, 2, 3, 4, 5, 9, 10}
+set_b = {4, 5, 6, 7, 8, 10, 11}
 
-venn2([set_a, set_b], ('Conjunto A', 'Conjunto B'))
+venn_diagram = venn2([set_a, set_b], ('Conjunto A', 'Conjunto B'))
+venn2_circles([set_a, set_b], linestyle='dashed')
+for text in venn_diagram.set_labels:
+    if text: text.set_fontsize(16)
+for text in venn_diagram.subset_labels:
+    if text: text.set_fontsize(12)
+
 plt.title('Diagrama de Venn de A e B')
 plt.show()
+
+

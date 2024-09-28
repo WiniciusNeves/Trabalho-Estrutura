@@ -1,26 +1,30 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-def eq1(x):
-    return (6 - 2 * x) / 3  
+def eq1(x, z):
+    return (4 - 3 * x + z) / 1  
 
-def eq2(x):
-    return (x + 1) / 2    
-
-def eq3(x):
-    return 5 - 3 * x   
+def eq2(x, y):
+    return (-2 * x - 5 * y) / 7    
 
 x_values = np.linspace(-1, 3, 400) 
+y_values = np.linspace(-1, 3, 400)
+z_values = np.linspace(-1, 3, 400) 
 
-y1_values = eq1(x_values)
-y2_values = eq2(x_values)
-y3_values = eq3(x_values)
+y1_values = eq1(x_values, z_values)
+y2_values = eq2(x_values, y_values)
+
+A = np.array([[3, 1, -1], [2, 5, 7], [1, 0, 0]])
+b = np.array([4, 0, 0])
+
+x, y, z = np.linalg.solve(A, b)
 
 plt.figure(figsize=(10, 6))
 
-plt.plot(x_values, y1_values, label='2x + 3y = 6', color='blue')
-plt.plot(x_values, y2_values, label='x - 2y = -1', color='green')
-plt.plot(x_values, y3_values, label='3x + y = 5', color='red')
+plt.plot(x_values, y1_values, label='3x + y - z = 4', color='blue')
+plt.plot(x_values, y2_values, label='2x + 5y + 7z = 0', color='green')
+
+plt.scatter(x, y, label='Solução', color='red')
 
 plt.xlim(-1, 3)
 plt.ylim(-1, 5)
@@ -32,3 +36,4 @@ plt.xlabel('x')
 plt.ylabel('y')
 plt.legend()
 plt.show()
+
